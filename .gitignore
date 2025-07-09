@@ -1,0 +1,40 @@
+# Backend - Elixir
+/store_api/_build/
+/store_api/deps/
+/store_api/*.ez
+/store_api/.elixir_ls/
+
+# Backend - Phoenix
+/store_api/priv/static/
+/store_api/priv/db/
+/store_api/log/*
+
+# Backend - Database files
+/store_api/*.db
+/store_api/*.sqlite3
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Frontend (React, etc.)
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.log
