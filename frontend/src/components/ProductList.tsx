@@ -4,8 +4,6 @@ interface ProductListProps {
   products: Product[];
   onEdit: (product: Product) => void;
   onDelete: (id: string) => void;
-  loading: boolean;
-  error: string | null;
 }
 
 export function ProductList({

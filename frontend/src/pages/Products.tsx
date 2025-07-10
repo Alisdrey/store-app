@@ -89,8 +89,6 @@ export default function Products() {
         products={products}
         onEdit={handleEdit}
         onDelete={deleteProduct}
-        loading={loading}
-        error={error}
       />
     </div>
   );
