@@ -4,11 +4,10 @@ defmodule StoreApiWeb.SessionController do
   action_fallback StoreApiWeb.FallbackController
 
   alias StoreApi.Accounts
-  alias StoreApiWeb.Auth.Guardian
-
+  alias StoreApi.Auth
   def login(conn, %{"email" => email, "password" => password}) do
     with {:ok, user} <- Accounts.authenticate_user(email, password),
-        {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
+         {:ok, token, _claims} <- Auth.encode_and_sign(user) do
       json(conn, %{token: token})
     else
       error ->

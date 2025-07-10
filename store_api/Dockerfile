@@ -4,13 +4,17 @@ RUN apt-get update && apt-get install -y build-essential inotify-tools postgresq
 
 WORKDIR /app
 
-COPY . .
-
-ARG SECRET_KEY_BASE
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
-
+# Copia o mix e lock primeiro para cache do deps
+COPY mix.exs mix.lock ./
 RUN mix local.hex --force && \
     mix local.rebar --force && \
     mix deps.get
 
-CMD ["sh", "-c", "mix ecto.setup && mix run priv/repo/seeds.exs && mix phx.server"]
+# Agora copia o restante da aplicação
+COPY . .
+
+# Torna o script executável
+RUN chmod +x ./start.sh
+
+# Usa o start.sh como ponto de entrada
+CMD ["./start.sh"]

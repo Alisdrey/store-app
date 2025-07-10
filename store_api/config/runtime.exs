@@ -20,6 +20,11 @@ if config_env() == :prod do
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
 
+
+  config :store_api, StoreApi.Auth,
+    issuer: "store_api",
+    secret_key: System.fetch_env!("GUARDIAN_SECRET_KEY")
+
   secret_key_base =
     System.get_env("SECRET_KEY_BASE") ||
       raise """

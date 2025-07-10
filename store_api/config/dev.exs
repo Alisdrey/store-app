@@ -14,8 +14,12 @@ config :store_api, StoreApiWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "uf6aRisBhqNhUsk76zeV0al/zd5HmfHcIeBH9kUbdpIfcqfe2kLL/s1HA4mTuD94",
+  secret_key_base: System.fetch_env!("SECRET_KEY_BASE"),
   watchers: []
+
+config :store_api, StoreApi.Auth,
+  issuer: "store_api",
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY") || "dev_fallback_secret"
 
 config :store_api, dev_routes: true
 

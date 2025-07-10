@@ -24,11 +24,6 @@ config :store_api, StoreApiWeb.Endpoint,
 
 config :store_api, StoreApi.Mailer, adapter: Swoosh.Adapters.Local
 
-config :store_api, StoreApiWeb.Auth.Guardian,
-  issuer: "store_api",
-  secret_key: System.fetch_env!("SECRET_KEY_BASE")
-
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

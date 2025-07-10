@@ -5,20 +5,19 @@ defmodule StoreApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", StoreApiWeb do
+  pipeline :auth do
+    plug StoreApiWeb.Plugs.AuthPlug
+  end
+
+  scope "/api/auth", StoreApiWeb do
     pipe_through :api
 
     post "/login", SessionController, :login
   end
 
-  if Application.compile_env(:store_api, :dev_routes) do
-    import Phoenix.LiveDashboard.Router
+  scope "/api", StoreApiWeb do
+    pipe_through [:api, :auth]
 
-    scope "/dev" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-
-      live_dashboard "/dashboard", metrics: StoreApiWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
-    end
+    resources "/products", ProductController, except: [:new, :edit]
   end
 end

@@ -18,6 +18,7 @@ defmodule StoreApi.Accounts.User do
     |> cast(attrs, [:email, :password])
     |> validate_required([:email, :password])
     |> unique_constraint(:email)
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "is not a valid email")
     |> put_password_hash()
   end
 

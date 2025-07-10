@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:15
@@ -17,6 +19,7 @@ services:
     build:
       context: ./store_api
       args:
+        GUARDIAN_SECRET_KEY: ${GUARDIAN_SECRET_KEY}
         SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     container_name: store_api
     ports:
@@ -24,10 +27,18 @@ services:
     depends_on:
       - db
     env_file:
-      - .env 
+      - .env
+    environment:
+      GUARDIAN_SECRET_KEY: ${GUARDIAN_SECRET_KEY}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: db
+      PHX_SERVER: true
     volumes:
       - ./store_api:/app
-    command: sh -c "mix deps.get && mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs && mix phx.server"
+    command: ./start.sh
 
 volumes:
   postgres_data:
