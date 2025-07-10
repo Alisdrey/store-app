@@ -47,6 +47,7 @@ defmodule StoreApi.MixProject do
       {:bandit, "~> 1.5"},
       {:bcrypt_elixir, "~> 3.0"},
       {:guardian, "~> 2.0"},
+      {:cors_plug, "~> 3.0"}
     ]
   end
 
