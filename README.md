@@ -40,6 +40,7 @@ DB_NAME=store_dev
 PHX_SERVER=true
 SECRET_KEY_BASE=your_phx_secret_base
 GUARDIAN_SECRET_KEY=your_guardian_secret
+VITE_API_URL=http://localhost:4001/api
 ```
 
 ### 3. Generate secret keys
